@@ -1,6 +1,7 @@
 [package]
 description = Intelligence utilities for Bro.
 tags = intel
+script_dir = bin
 depends =
 	bro >=2.5.0
-build_command = (mkdir go && export GOPATH=$(pwd)/go && go get github.com/hosom/gobrointel && cd zeus && go build)
+build_command = (mkdir go && export GOPATH=$(pwd)/go && go get github.com/hosom/gobrointel && cd zeus && go build && cp zeus ../bin/zeus)
