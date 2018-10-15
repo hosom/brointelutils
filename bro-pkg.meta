@@ -4,4 +4,12 @@ tags = intel
 script_dir = bin
 depends =
 	bro >=2.5.0
-build_command = (mkdir go && export GOPATH=$(pwd)/go && go get github.com/hosom/gobrointel && cd zeus && go build && cp zeus ../bin/zeus)
+build_command = (mkdir go && export GOPATH=$(pwd)/go && 
+				go get github.com/hosom/gobrointel && 
+				cd zeus && 
+				go build && 
+				cp zeus ../bin/zeus &&
+				cd ../otx &&
+				go get github.com/AlienVault-OTX/OTX-Go-SDK/src/otxapi &&
+				go build
+				cp otx ../bin/otx)
