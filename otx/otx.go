@@ -7,6 +7,8 @@ import (
 	"flag"
 	"os"
 	"fmt"
+	"io/ioutil"
+	"log"
 
 	"github.com/hosom/gobrointel"
 	"github.com/AlienVault-OTX/OTX-Go-SDK/src/otxapi"
@@ -41,7 +43,6 @@ func main() {
 		"Whether this intel source should generate Notices.")
 	flag.Parse()
 
-
 	meta := brointel.MetaData{feed, desc, "PlaceHolder", *doNotice}
 
 	os.Setenv("X_OTX_API_KEY", *apiKey)
@@ -54,7 +55,13 @@ func main() {
 		fmt.Printf("Error: %v\n\n", err)
 	} 
 
-	fmt.Println(brointel.Headers())
+	tmpfile, err := ioutil.TempFile("./", "")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer tmpfile.Close()
+
+	fmt.Fprintln(tmpfile, brointel.Headers())
 	// bool used to signal whether or not the API has more pages of results
 	moreResults := true
 	for moreResults {
@@ -79,9 +86,15 @@ func main() {
 					}
 
 					// print intelligence framework entry
-					fmt.Println(ioc.String())
+					fmt.Fprintln(tmpfile, ioc.String())
 				}
 			}
 		}
+	}
+
+	fname := tmpfile.Name()
+	err = os.Rename(fname, "./otx.dat")
+	if err != nil {
+		log.Fatal(err)
 	}
 }
