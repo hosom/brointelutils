@@ -1,11 +1,11 @@
-module brointelutils
+module brointelutils;
 
 export {
     ## Options for OTX sync
-    const enable_otx: bool = F;
-    const otx_api_key: string = "";
-    const otx_days: count 30;
-    const otx_doNotice: bool = T;
+    const enable_otx: bool = F &redef;
+    const otx_api_key: string = "" &redef;
+    const otx_days: count 30 &redef;
+    const otx_doNotice: bool = T &redef;
 }
 
 @if ( ! Cluster::is_enabled() 
