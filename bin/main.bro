@@ -6,6 +6,7 @@ export {
     const otx_api_key: string = "" &redef;
     const otx_days: count 30 &redef;
     const otx_doNotice: bool = T &redef;
+    const sync_interval: interval = 1hr &redef;
 }
 
 @if ( ! Cluster::is_enabled() 
@@ -21,7 +22,7 @@ event bro_init()
         {
         local c = cron::CronJob(
             $command=Exec::Command($cmd=otxCmd), 
-            $i=1hr, 
+            $i=sync_interval, 
             $reschedule=T);
         event cron::run_cron(c);
         }
