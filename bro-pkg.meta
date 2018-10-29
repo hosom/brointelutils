@@ -10,6 +10,8 @@ build_command = (mkdir go && export GOPATH=$(pwd)/go &&
 				go build && 
 				cp zeus ../bin/zeus &&
 				cd ../otx &&
-				go get github.com/AlienVault-OTX/OTX-Go-SDK/src/otxapi &&
+				go build &&
+				cp otx ../bin/otx &&
+				cd ../ransomware &&
 				go build
-				cp otx ../bin/otx)
+				cp ransomware ../bin/ransomware)
