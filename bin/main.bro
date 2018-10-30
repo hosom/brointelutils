@@ -6,6 +6,7 @@ export {
     const otx_api_key: string = "" &redef;
     const otx_days: count 30 &redef;
     const otx_doNotice: bool = T &redef;
+    const otx_file: string = fmt("%s/otx.dat", @DIR) &redef;
     const sync_interval: interval = 1hr &redef;
 }
 

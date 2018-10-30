@@ -43,6 +43,7 @@ func main() {
 	days := flag.Int("days", 30, "How many days of pulses should be downloaded.")
 	doNotice := flag.Bool("doNotice", false, 
 		"Whether this intel source should generate Notices.")
+	outfile := flag.String("file", "./otx.dat", "file path to write to.")
 	flag.Parse()
 
 	// Get x days ago, then convert it to a string for use in the API calls
@@ -93,7 +94,7 @@ func main() {
 	}
 
 	fname := tmpfile.Name()
-	err = os.Rename(fname, "./otx.dat")
+	err = os.Rename(fname, *outfile)
 	if err != nil {
 		log.Fatal(err)
 	}
