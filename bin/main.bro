@@ -15,7 +15,7 @@ export {
 event bro_init()
     {
     # Schedule OTX for 
-    local otxCmd = fmt("%s/otx -apiKey %s -days %s", @DIR, otx_api_key, otx_days);
+    local otxCmd = fmt("%s/otx -apiKey %s -days %s -f %s", @DIR, otx_api_key, otx_days, otx_file);
     if ( otx_doNotice )
         otxCmd = otxCmd + " -doNotice";
     
